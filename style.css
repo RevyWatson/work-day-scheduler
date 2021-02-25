@@ -28,7 +28,7 @@ textarea{
   white-space: pre-wrap;
 }
 
-/*styling for tight egde of button*/
+/*styling for save buttons*/
 .time-block{
   text-align: center;
   border-radius: 15px;
@@ -66,8 +66,7 @@ textarea{
 /*button stying*/
 .saveBtn {
   border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 0 15px 15px 0;
   background-color: #06AED5;
   color: white;
 }
