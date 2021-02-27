@@ -3,18 +3,18 @@ let today = moment();
 $("#currentDay").text(today.format("dddd, MMMM Do"));
 
 $(document).ready(function () {
-
-
+  
+  
   //save buttons event listener
   $(".saveBtn").on("click", function () {
     let value = $(this).siblings(".description").val();
     console.log(value);
-
+    
     let time = $(this).siblings(".hour").attr("id");
     console.log(time);
     localStorage.setItem(time, value) //local storage for each time block - sets/saves event input text
   });
-
+  
   //local storage for each time block - takes saved event input text and gets them to be stored
   $(".nineAm").val(localStorage.getItem("9am"));
   $(".tenAm").val(localStorage.getItem("10am"));
@@ -25,40 +25,39 @@ $(document).ready(function () {
   $(".threePm").val(localStorage.getItem("3pm"));
   $(".fourPm").val(localStorage.getItem("4pm"));
   $(".fivePm").val(localStorage.getItem("5pm"));
-
+  
   // moment.js for getting hourly time
-  let currentTime = moment().format("h");
-  console.log(currentTime);
-
+  let currentTime = moment().hours();
+  // console.log(currentTime);
+  
   let timeBlock = $(".time-block");
-    timeBlock.each(function() {
+  timeBlock.each(function(index, element) {
+    let compare = parseInt($(this).attr("data-hour"));
+    console.log(element.getAttribute("data-hour"));
+    //attaching CSS to the time for past, present and future
+    if (currentTime === compare) {
+      $(this).addClass("present");
+      $(this).removeClass("future");
+      $(this).removeClass("past");
+      console.log("present");
       
+    } else if (currentTime > compare) {
+      $(this).addClass("past");
+      $(this).removeClass("present");
+      $(this).removeClass("future");
+      console.log("past");
       
-      //attaching CSS to the time for past, present and future
-      if (currentTime === timeBlock) {
-        $(this).addClass("present");
-        $(this).removeClass("future");
-        $(this).removeClass("past");
-        
-      } else if (currentTime < timeBlock) {
-        $(this).addClass("past");
-        $(this).removeClass("present");
-        $(this).addClass("future");
-        
-      } else {
-        $(this).addClass("future");
-        $(this).removeClass("past");
-        $(this).removeClass("present");
-      }});
+    } else if (currentTime < compare) {
+      $(this).addClass("future");
+      $(this).removeClass("past");
+      $(this).removeClass("present");
+      console.log("future");
+    } else {
+        console.log("It is done!")
+      }
+      });
       
     });
-    
-    
-    
-    // let timeBlock = parseInt($(this).attr("id").split("hour")[1]);
-    //   console.log( timeBlock, currentTime);
-    // .each(.time-block) {
-    //   grab only numeric value from each time block (9am, 10am, etc)
-    //   remove "am" and convert into a number
-    //   let parseInt("string")
-    //   if (each) block time < addClass(past) use (this)
+    //updates the time blocks live
+    let hourlyUpdate = setInterval(displayTime, 1000);
+    displayTime();
