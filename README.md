@@ -8,3 +8,5 @@ This was the fifth homework assignment for the [MSU Coding Boot Camp](https://bo
 * When user clicks a timeblock they can enter an event.
 * When user clicks the save button for that timeblock the text for that event is saved in local storage.
 * When user refreshes the page the saved events remain present.
+
+![work_day_scheduler](https://user-images.githubusercontent.com/76264693/109403393-35e9c700-792b-11eb-97ba-541dc0d9adaa.jpg)
